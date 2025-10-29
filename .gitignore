@@ -1,1 +1,87 @@
+# --- MATLAB / Simulink temporary and backup files ---
+*.asv
+*.slxc
+*.slprj/
+*.mex*
+*.autosave
+*.autosave.*
+*.autosave_*
+*.mdl.autosave
+*.mdl.r*
+*.mdl.bak
+*.slx.r*
+*.slx.bak
+*.slxc
+*.slxc.*
+*.slxc_autosave
+*.slxc.bkp
+*.slxc_backup
+*.slxc_autosave
+*.slxc_autosave_backup
+*.mexa64
+*.mexw64
+*.mexmaci64
 
+# --- Simulink cache and codegen folders ---
+slprj/
+sccprj/
+simulink_prj/
+codegen/
+work/
+build/
+cache/
+logs/
+matlab_metadata/
+
+# --- MATLAB session data ---
+*.mat~            # temporary session autosaves
+*.m~              # backup script copies
+*.fig.autosave
+*.fig.bak
+*.mdl.autosave
+*.mat.autosave
+
+# --- OS junk ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Project-specific ---
+*.slxc
+*.slxc_backup
+*.slxc_autosave
+*.simstate
+*.sfprj
+*.tmf
+*.tlc
+*.log
+*.diag
+*.autosave
+*.bak
+*.zip
+*.gz
+*.tgz
+*.tar
+*.rar
+*.tmp
+*.temp
+*.old
+
+# --- Ignore MATLAB preferences, local settings, and cache ---
+matlab_settings/
+matlab_cache/
+matlab_tmp/
+temp/
+tmp/
+
+# --- Keep your own folders safe ---
+!models/
+!scripts/
+!config/
+!plots/
+!docs/
+!outputs/
+!README.md
+!LICENSE
+!data/
+!tests/
