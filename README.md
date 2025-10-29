@@ -1,3 +1,2 @@
-# Daikin
+# Daikin Working Doc
 
-This is the repository for Daikin simulink demo schematic. 
