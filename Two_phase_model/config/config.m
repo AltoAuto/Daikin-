@@ -26,15 +26,30 @@ CFG.P_low = 4e5;          %  [Pa] low pressure reservior
 CFG.high_reservior_tep = 306;   % 33.5 [C] high pressure side tempreture 
 CFG.low_reservior_tep = 306;    % 33.5 [C] low pressure side tempreture 
 
-% Valve model
-CFG.Opening_init   = 0.5;      % [0–1] initial Opening of the EXV valve, final opening of TXV valve
-CFG.Amax     = 8e-6;      % [m^2] Max opening for expansion valve
-CFG.tau_txv  = 7.0;         % [s] time constant for TXV Lag
-CFG.rate_lim = 0.07;        % [per second] rate limiter for EXV command)
-CFG.u_minmax = [0 1];       % for saturation block, used for EXV opening 
-CFG.ValveMode = struct('EXV',1,'TXV',0);        % Valve selection mode
-CFG.tau_exv  = 0.1;         % [s] time constant for TXV Lag
-CFG.Valve_pipe.D = 0.012; 
+
+%% Valve model
+cfg.mode =0;     % Valve selection mode: 1 PI contorl, 0 Manual sweep
+cfg.exv.mode               = "area_sqrt";    % "area_sqrt" | "area_table" | "cv_table"
+
+%  Actuator & limits 
+cfg.exv.u_min              = 0.05;           % [-] min commanded opening
+cfg.exv.u_max              = 0.95;           % [-] max commanded opening
+cfg.exv.rate_lim_per_s     = 0.03;           % [1/s] max opening slew
+cfg.exv.tau_s              = 0.10;           % [s] first-order actuator lag
+
+% EXV area mapping (sqrt-law approximation)
+% A(u) = Amin + (Amax – Amin)*sqrt(u)
+% Approximates real valve flow behavior (ṁ ∝ A*sqrt(ΔP)); replace with
+% measured Cv/area data when available.
+cfg.exv.Amax_m2           = 2.4e-6;                  % [m²] fully open effective flow area
+cfg.exv.Amin_m2           = 0.05*cfg.exv.Amax_m2;    % [m²] leakage / never zero
+cfg.exv.area_map_u_vec    = [0 1];                   % [-] opening command breakpoints
+cfg.exv.area_map_A_m2_vec = [cfg.exv.Amin_m2 cfg.exv.Amax_m2];  % [m²] placeholder map
+
+% Demo step (open-loop test) 
+cfg.exv.step_u1            = 0.33;           % [-] initial opening
+cfg.exv.step_u2           = 0.37;           % [-] final opening
+cfg.exv.step_time_s        = 20;             % [s] step time
 
 % Condenser Pipe (TL)
 CFG.T_amb_condK = 293;   % 33 °C (typical ambient; condenser dumps heat OUT)
